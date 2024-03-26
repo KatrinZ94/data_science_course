@@ -1,1 +1,23 @@
+Сохранение репозитория
+git clone https://github.com/ultralytics/yolov5
+(или через браузер по ссылке https://github.com/ultralytics/yolov5)
 
+Создание окружения
+python -m venv testenv
+
+Активация окружения
+.\testenv\scripts\activate
+
+Установка зависимостей
+pip install -r requirements.txt
+
+
+Дообучение модели на датасете coco128
+Датасет coco128 представляет собой каталог с набором изображения, а так же каталог с информацией о классах и полигонах для каждого из изображений
+Дообучение 
+python train.py --img 640 --batch=2 --epochs 5 --data coco128.yaml --weights yolov5s.pt --cache
+После каждого обучения сохраняются лучшие веса "best.pt" и предыдущие "last.pt"
+
+Запуск модели на ранее скаченном видео (--source 'C:\ML\HW\hw5video.mp4'). Выводится будут только те классы в которых уверенность не менее 50% (--conf 0.5)
+python detect.py --weights runs/train/exp3/weights/best.pt --img 640 --conf 0.5 --source 'C:\ML\HW\hw5video.mp4'
+Результат работы модели: hw5video
